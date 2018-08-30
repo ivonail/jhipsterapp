@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Article.
+ * A Employee.
  */
 @Entity
-@Table(name = "article")
-public class Article implements Serializable {
+@Table(name = "employee")
+public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,12 +21,14 @@ public class Article implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 2, max = 22)
-    @Column(name = "name", length = 22, nullable = false)
-    private String name;
+    @Pattern(regexp = "([A-Za-z]*)")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name = "amount")
-    private Long amount;
+    @NotNull
+    @Pattern(regexp = "([A-Za-z]*)")
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -37,30 +39,30 @@ public class Article implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public Article name(String name) {
-        this.name = name;
+    public Employee firstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Long getAmount() {
-        return amount;
+    public String getLastName() {
+        return lastName;
     }
 
-    public Article amount(Long amount) {
-        this.amount = amount;
+    public Employee lastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -72,11 +74,11 @@ public class Article implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Article article = (Article) o;
-        if (article.getId() == null || getId() == null) {
+        Employee employee = (Employee) o;
+        if (employee.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), article.getId());
+        return Objects.equals(getId(), employee.getId());
     }
 
     @Override
@@ -86,10 +88,10 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "Article{" +
+        return "Employee{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", amount=" + getAmount() +
+            ", firstName='" + getFirstName() + "'" +
+            ", lastName='" + getLastName() + "'" +
             "}";
     }
 }

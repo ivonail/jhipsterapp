@@ -1,17 +1,23 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="article">
-            <h2><span jhiTranslate="brezaApp.article.detail.title">Article</span> {{article.id}}</h2>
+        <div *ngIf="client">
+            <h2><span jhiTranslate="brezaApp.client.detail.title">Client</span> {{client.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="brezaApp.article.name">Name</span></dt>
+                <dt><span jhiTranslate="brezaApp.client.fistName">Fist Name</span></dt>
                 <dd>
-                    <span>{{article.name}}</span>
+                    <span>{{client.fistName}}</span>
                 </dd>
-                <dt><span jhiTranslate="brezaApp.article.amount">Amount</span></dt>
+                <dt><span jhiTranslate="brezaApp.client.lastName">Last Name</span></dt>
                 <dd>
-                    <span>{{article.amount}}</span>
+                    <span>{{client.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="brezaApp.client.toCity">To City</span></dt>
+                <dd>
+                    <div *ngIf="client.toCity">
+                        <a [routerLink]="['/city', client.toCity?.id, 'view']">{{client.toCity?.name}}</a>
+                    </div>
                 </dd>
             </dl>
 
@@ -22,7 +28,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/article', article.id, 'edit']"
+                    [routerLink]="['/client', client.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>

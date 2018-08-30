@@ -16,8 +16,8 @@
             "detail": {
                 "title": "Article"
             },
-            "amount": "Amount",
-            "name": "Name"
+            "name": "Name",
+            "amount": "Amount"
         }
     }
 }

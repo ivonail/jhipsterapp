@@ -39,11 +39,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BrezaApp.class)
 public class ArticleResourceIntTest {
 
-    private static final Long DEFAULT_AMOUNT = 1L;
-    private static final Long UPDATED_AMOUNT = 2L;
-
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final Long DEFAULT_AMOUNT = 1L;
+    private static final Long UPDATED_AMOUNT = 2L;
 
     @Autowired
     private ArticleRepository articleRepository;
@@ -84,8 +84,8 @@ public class ArticleResourceIntTest {
      */
     public static Article createEntity(EntityManager em) {
         Article article = new Article()
-            .amount(DEFAULT_AMOUNT)
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .amount(DEFAULT_AMOUNT);
         return article;
     }
 
@@ -109,8 +109,8 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeCreate + 1);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testArticle.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testArticle.getAmount()).isEqualTo(DEFAULT_AMOUNT);
     }
 
     @Test
@@ -161,8 +161,8 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(article.getId().intValue())))
-            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())));
     }
     
 
@@ -177,8 +177,8 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(article.getId().intValue()))
-            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()));
     }
     @Test
     @Transactional
@@ -201,8 +201,8 @@ public class ArticleResourceIntTest {
         // Disconnect from session so that the updates on updatedArticle are not directly saved in db
         em.detach(updatedArticle);
         updatedArticle
-            .amount(UPDATED_AMOUNT)
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .amount(UPDATED_AMOUNT);
 
         restArticleMockMvc.perform(put("/api/articles")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -213,8 +213,8 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeUpdate);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testArticle.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testArticle.getAmount()).isEqualTo(UPDATED_AMOUNT);
     }
 
     @Test
