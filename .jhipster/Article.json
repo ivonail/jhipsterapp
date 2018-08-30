@@ -4,16 +4,19 @@
     "relationships": [],
     "fields": [
         {
+            "fieldName": "amount",
+            "fieldType": "Long"
+        },
+        {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
+                "required",
+                "minlength",
                 "maxlength"
             ],
-            "fieldValidateRulesMaxlength": "20"
-        },
-        {
-            "fieldName": "amount",
-            "fieldType": "Long"
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "22"
         }
     ],
     "changelogDate": "20180830084744",

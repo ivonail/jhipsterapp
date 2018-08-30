@@ -20,12 +20,13 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 20)
-    @Column(name = "name", length = 20)
-    private String name;
-
     @Column(name = "amount")
     private Long amount;
+
+    @NotNull
+    @Size(min = 2, max = 22)
+    @Column(name = "name", length = 22, nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -34,19 +35,6 @@ public class Article implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Article name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Long getAmount() {
@@ -60,6 +48,19 @@ public class Article implements Serializable {
 
     public void setAmount(Long amount) {
         this.amount = amount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Article name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -87,8 +88,8 @@ public class Article implements Serializable {
     public String toString() {
         return "Article{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
             ", amount=" + getAmount() +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

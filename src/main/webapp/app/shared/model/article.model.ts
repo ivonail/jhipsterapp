@@ -1,9 +1,9 @@
 export interface IArticle {
     id?: number;
-    name?: string;
     amount?: number;
+    name?: string;
 }
 
 export class Article implements IArticle {
-    constructor(public id?: number, public name?: string, public amount?: number) {}
+    constructor(public id?: number, public amount?: number, public name?: string) {}
 }

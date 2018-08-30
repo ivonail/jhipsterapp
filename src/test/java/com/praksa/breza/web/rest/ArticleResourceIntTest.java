@@ -39,11 +39,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BrezaApp.class)
 public class ArticleResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
     private static final Long DEFAULT_AMOUNT = 1L;
     private static final Long UPDATED_AMOUNT = 2L;
+
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private ArticleRepository articleRepository;
@@ -84,8 +84,8 @@ public class ArticleResourceIntTest {
      */
     public static Article createEntity(EntityManager em) {
         Article article = new Article()
-            .name(DEFAULT_NAME)
-            .amount(DEFAULT_AMOUNT);
+            .amount(DEFAULT_AMOUNT)
+            .name(DEFAULT_NAME);
         return article;
     }
 
@@ -109,8 +109,8 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeCreate + 1);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testArticle.getAmount()).isEqualTo(DEFAULT_AMOUNT);
+        assertThat(testArticle.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -134,6 +134,24 @@ public class ArticleResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = articleRepository.findAll().size();
+        // set the field null
+        article.setName(null);
+
+        // Create the Article, which fails.
+
+        restArticleMockMvc.perform(post("/api/articles")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(article)))
+            .andExpect(status().isBadRequest());
+
+        List<Article> articleList = articleRepository.findAll();
+        assertThat(articleList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllArticles() throws Exception {
         // Initialize the database
         articleRepository.saveAndFlush(article);
@@ -143,8 +161,8 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(article.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())));
+            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
     
 
@@ -159,8 +177,8 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(article.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()));
+            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
     @Test
     @Transactional
@@ -183,8 +201,8 @@ public class ArticleResourceIntTest {
         // Disconnect from session so that the updates on updatedArticle are not directly saved in db
         em.detach(updatedArticle);
         updatedArticle
-            .name(UPDATED_NAME)
-            .amount(UPDATED_AMOUNT);
+            .amount(UPDATED_AMOUNT)
+            .name(UPDATED_NAME);
 
         restArticleMockMvc.perform(put("/api/articles")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -195,8 +213,8 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeUpdate);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testArticle.getAmount()).isEqualTo(UPDATED_AMOUNT);
+        assertThat(testArticle.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test
