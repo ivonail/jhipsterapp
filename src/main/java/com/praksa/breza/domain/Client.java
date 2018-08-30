@@ -22,18 +22,25 @@ public class Client implements Serializable {
     private Long id;
 
     @NotNull
-    @Pattern(regexp = "([a-zA-Z]*)")
-    @Column(name = "fist_name", nullable = false)
-    private String fistName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
-    @Pattern(regexp = "([a-zA-Z]*)")
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "address", nullable = false)
+    private String address;
 
-    @ManyToOne
+    @NotNull
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
+
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties("")
-    private City toCity;
+    private City city;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -44,43 +51,69 @@ public class Client implements Serializable {
         this.id = id;
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getName() {
+        return name;
     }
 
-    public Client fistName(String fistName) {
-        this.fistName = fistName;
+    public Client name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getAddress() {
+        return address;
     }
 
-    public Client lastName(String lastName) {
-        this.lastName = lastName;
+    public Client address(String address) {
+        this.address = address;
         return this;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public City getToCity() {
-        return toCity;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public Client toCity(City city) {
-        this.toCity = city;
+    public Client phoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
-    public void setToCity(City city) {
-        this.toCity = city;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Client email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public Client city(City city) {
+        this.city = city;
+        return this;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -108,8 +141,10 @@ public class Client implements Serializable {
     public String toString() {
         return "Client{" +
             "id=" + getId() +
-            ", fistName='" + getFistName() + "'" +
-            ", lastName='" + getLastName() + "'" +
+            ", name='" + getName() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

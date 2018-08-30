@@ -30,6 +30,11 @@ public class Employee implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @OneToOne(optional = false)
+    @NotNull
+    @JoinColumn(unique = true)
+    private Position position;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -63,6 +68,19 @@ public class Employee implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public Employee position(Position position) {
+        this.position = position;
+        return this;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

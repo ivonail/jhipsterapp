@@ -24,11 +24,9 @@ public class City implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "zip")
-    private Integer zip;
-
-    @Column(name = "state")
-    private String state;
+    @NotNull
+    @Column(name = "zipcode", nullable = false)
+    private String zipcode;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -52,30 +50,17 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public Integer getZip() {
-        return zip;
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public City zip(Integer zip) {
-        this.zip = zip;
+    public City zipcode(String zipcode) {
+        this.zipcode = zipcode;
         return this;
     }
 
-    public void setZip(Integer zip) {
-        this.zip = zip;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public City state(String state) {
-        this.state = state;
-        return this;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -104,8 +89,7 @@ public class City implements Serializable {
         return "City{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", zip=" + getZip() +
-            ", state='" + getState() + "'" +
+            ", zipcode='" + getZipcode() + "'" +
             "}";
     }
 }

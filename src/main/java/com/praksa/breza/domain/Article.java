@@ -25,8 +25,17 @@ public class Article implements Serializable {
     @Column(name = "name", length = 22, nullable = false)
     private String name;
 
-    @Column(name = "amount")
-    private Long amount;
+    @NotNull
+    @Column(name = "article_number", nullable = false)
+    private Integer articleNumber;
+
+    @NotNull
+    @Column(name = "price", nullable = false)
+    private Integer price;
+
+    @NotNull
+    @Column(name = "available_amount", nullable = false)
+    private Long availableAmount;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -50,17 +59,43 @@ public class Article implements Serializable {
         this.name = name;
     }
 
-    public Long getAmount() {
-        return amount;
+    public Integer getArticleNumber() {
+        return articleNumber;
     }
 
-    public Article amount(Long amount) {
-        this.amount = amount;
+    public Article articleNumber(Integer articleNumber) {
+        this.articleNumber = articleNumber;
         return this;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setArticleNumber(Integer articleNumber) {
+        this.articleNumber = articleNumber;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public Article price(Integer price) {
+        this.price = price;
+        return this;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Long getAvailableAmount() {
+        return availableAmount;
+    }
+
+    public Article availableAmount(Long availableAmount) {
+        this.availableAmount = availableAmount;
+        return this;
+    }
+
+    public void setAvailableAmount(Long availableAmount) {
+        this.availableAmount = availableAmount;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -89,7 +124,9 @@ public class Article implements Serializable {
         return "Article{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", amount=" + getAmount() +
+            ", articleNumber=" + getArticleNumber() +
+            ", price=" + getPrice() +
+            ", availableAmount=" + getAvailableAmount() +
             "}";
     }
 }

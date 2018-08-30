@@ -16,9 +16,11 @@
             "detail": {
                 "title": "Client"
             },
-            "fistName": "Fist Name",
-            "lastName": "Last Name",
-            "toCity": "To City"
+            "name": "Name",
+            "address": "Address",
+            "phoneNumber": "Phone Number",
+            "email": "Email",
+            "City": "City"
         }
     }
 }

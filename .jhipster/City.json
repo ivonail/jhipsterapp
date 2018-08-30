@@ -1,7 +1,8 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+    ],
     "fields": [
         {
             "fieldName": "name",
@@ -11,12 +12,11 @@
             ]
         },
         {
-            "fieldName": "zip",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "state",
-            "fieldType": "String"
+            "fieldName": "zipcode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180830093240",

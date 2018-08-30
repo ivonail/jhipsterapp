@@ -15,8 +15,25 @@
             "fieldValidateRulesMaxlength": "22"
         },
         {
-            "fieldName": "amount",
-            "fieldType": "Long"
+            "fieldName": "articleNumber",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "availableAmount",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
        
     ],

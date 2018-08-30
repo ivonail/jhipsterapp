@@ -3,30 +3,43 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "toCity",
+            "relationshipName": "City",
             "otherEntityName": "city",
             "relationshipType": "many-to-one",
-            "otherEntityField": "name"
+            "otherEntityField": "name",
+            "relationshipValidateRules": [
+                "required"
+            ]
         }
     ],
     "fields": [
         {
-            "fieldName": "fistName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
-                "pattern"
-            ],
-            "fieldValidateRulesPattern": "([a-zA-Z]*)"
+                "required"
+            ]
         },
         {
-            "fieldName": "lastName",
+            "fieldName": "address",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
-                "pattern"
-            ],
-            "fieldValidateRulesPattern": "([a-zA-Z]*)"
+                "required"
+            ]
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180830102310",

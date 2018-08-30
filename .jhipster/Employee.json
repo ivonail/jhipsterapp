@@ -2,7 +2,17 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "relationships": [
-       
+        {
+            "relationshipName": "position",
+            "otherEntityName": "position",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "employee"
+        }
     ],
     "fields": [
         {

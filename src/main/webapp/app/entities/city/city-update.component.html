@@ -21,14 +21,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="brezaApp.city.zip" for="field_zip">Zip</label>
-                    <input type="number" class="form-control" name="zip" id="field_zip"
-                        [(ngModel)]="city.zip" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="brezaApp.city.state" for="field_state">State</label>
-                    <input type="text" class="form-control" name="state" id="field_state"
-                        [(ngModel)]="city.state" />
+                    <label class="form-control-label" jhiTranslate="brezaApp.city.zipcode" for="field_zipcode">Zipcode</label>
+                    <input type="text" class="form-control" name="zipcode" id="field_zipcode"
+                        [(ngModel)]="city.zipcode" required/>
+                    <div [hidden]="!(editForm.controls.zipcode?.dirty && editForm.controls.zipcode?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.zipcode?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
 
             </div>
