@@ -5,7 +5,7 @@
         {
             "relationshipName": "position",
             "otherEntityName": "position",
-            "relationshipType": "one-to-one",
+            "relationshipType": "many-to-one",
             "relationshipValidateRules": [
                 "required"
             ],
