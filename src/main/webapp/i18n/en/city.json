@@ -17,7 +17,8 @@
                 "title": "City"
             },
             "name": "Name",
-            "zipcode": "Zipcode"
+            "zipcode": "Zipcode",
+            "client": "Client"
         }
     }
 }

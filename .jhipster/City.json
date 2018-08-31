@@ -2,6 +2,12 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "relationships": [
+        {
+            "relationshipName": "client",
+            "otherEntityName": "client",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "city"
+        }
     ],
     "fields": [
         {

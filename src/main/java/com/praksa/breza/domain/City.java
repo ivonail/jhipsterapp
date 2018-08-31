@@ -1,10 +1,13 @@
 package com.praksa.breza.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -27,6 +30,9 @@ public class City implements Serializable {
     @NotNull
     @Column(name = "zipcode", nullable = false)
     private String zipcode;
+
+    @OneToMany(mappedBy = "city")
+    private Set<Client> clients = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -61,6 +67,31 @@ public class City implements Serializable {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public City clients(Set<Client> clients) {
+        this.clients = clients;
+        return this;
+    }
+
+    public City addClient(Client client) {
+        this.clients.add(client);
+        client.setCity(this);
+        return this;
+    }
+
+    public City removeClient(Client client) {
+        this.clients.remove(client);
+        client.setCity(null);
+        return this;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
