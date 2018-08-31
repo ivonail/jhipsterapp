@@ -9,9 +9,16 @@ h3,
 h4 {
     font-weight: 300;
 }
+.ivona {
+    background-color: rgba(0, 0, 0, 0.493);
+    color: #eee;
+}
 
 body {
     background: #e4e5e6;
+    background-image: url(https://www.egon.com/wp-content/uploads/2017/09/adattarhaz.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a {

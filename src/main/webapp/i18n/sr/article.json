@@ -3,11 +3,11 @@
     "brezaApp": {
         "article" : {
             "home": {
-                "title": "Articles",
-                "createLabel": "Kreiraj novi Article",
-                "createOrEditLabel": "Kreirajte ili izmenite Article"
+                "title": "Artikal",
+                "createLabel": "Kreiraj novi artikal",
+                "createOrEditLabel": "Kreirajte ili izmenite artikal"
             },
-            "created": "Kreiran je novi Article pod nazivom {{ param }}",
+            "created": "Kreiran je novi artikal pod nazivom {{ param }}",
             "updated": "Article pod nazivom {{ param }} je ažuriran",
             "deleted": "Article pod nazivom {{ param }} je obrisan",
             "delete": {

@@ -20,7 +20,7 @@ Developement Ribbon
 }
 
 .ribbon a {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.466);
     display: block;
     font-weight: 400;
     margin: 1px 0;
