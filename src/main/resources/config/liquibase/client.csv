@@ -1,0 +1,11 @@
+id;name;address;phone_number;email;city_id
+1;Breza;Kraljice Natalije 37;282302;breza@breza.rs;1
+2;Microsoft;Menijeva 4;3423423;microsoft@eunet.com;3
+3;Hleb i kifle;Makenzijeva 3;234784923;hleb@kifle.com;4
+4;Oracle;Maksima Gorkog 60;545545454;oracle@orc.rs;2
+5;Milka;Bulevar Cokolade 6;6582485;milka@milka.rs;5
+6;Sony;Jurija Gagarina 44;3233223;sony@soni.mk;3
+7;Netflix;Noname 88;2342342;netflix@net.com;6
+8;Intel;Gandijeva 3;324234;intel@inside.com;1
+9;Diesel;Brendijeva 4;5444355;diesel@up.co;2
+10;Nolit;Njegoseva 66;5354646;nolit@no.com;4
