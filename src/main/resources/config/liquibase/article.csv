@@ -1,0 +1,13 @@
+id;name;article_number;price;available_amount;type_id
+1;Trosed;858;500;30;1
+2;Fotelja;859;250;27;1
+3;Lampa;860;100;12;1
+4;Monitor HP;900;200;8;3
+5;Zvucnici;901;20;11;null
+6;Tastatura IBM;902;30;25;null
+7;Klima Fujitsu;903;205;3;3
+8;Mis Dell;904;20;4;null
+9;Monitor Samsung;905;199;8;null
+10;Sveska A4;1000;5;44;null
+11;Olovka HB;1001;2;200;null
+12;Sveska A5;1002;4;80;null
