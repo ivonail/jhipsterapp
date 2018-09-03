@@ -15,6 +15,16 @@ export class CityComponent implements OnInit, OnDestroy {
     cities: ICity[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    settings = {
+        columns: {
+            name: {
+                title: 'Name'
+            },
+            zipcode: {
+                title: 'Zipcode'
+            }
+        }
+    };
 
     constructor(
         private cityService: CityService,
