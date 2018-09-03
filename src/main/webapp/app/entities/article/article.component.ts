@@ -55,4 +55,20 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+    settings = {
+        columns: {
+            id: {
+                title: 'ID'
+            },
+            name: {
+                title: 'Name'
+            },
+            articleNumber: {
+                title: 'Article Number'
+            },
+            availableAmount: {
+                title: 'Available amount'
+            }
+        }
+    };
 }
