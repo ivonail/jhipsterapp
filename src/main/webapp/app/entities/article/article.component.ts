@@ -15,6 +15,25 @@ export class ArticleComponent implements OnInit, OnDestroy {
     articles: IArticle[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    settings = {
+        columns: {
+            id: {
+                title: 'ID'
+            },
+            name: {
+                title: 'Name'
+            },
+            articleNumber: {
+                title: 'Article Number'
+            },
+            price: {
+                title: 'Price'
+            },
+            availableAmount: {
+                title: 'Available amount'
+            }
+        }
+    };
 
     constructor(
         private articleService: ArticleService,
@@ -55,20 +74,4 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-    settings = {
-        columns: {
-            id: {
-                title: 'ID'
-            },
-            name: {
-                title: 'Name'
-            },
-            articleNumber: {
-                title: 'Article Number'
-            },
-            availableAmount: {
-                title: 'Available amount'
-            }
-        }
-    };
 }
