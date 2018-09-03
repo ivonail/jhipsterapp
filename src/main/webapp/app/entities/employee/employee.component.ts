@@ -7,6 +7,7 @@ import { IEmployee } from 'app/shared/model/employee.model';
 import { Principal } from 'app/core';
 import { EmployeeService } from './employee.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { IPosition } from 'app/shared/model/position.model';
 
 @Component({
     selector: 'jhi-employee',
@@ -20,15 +21,14 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
     settings = {
         columns: {
-            firstName: {
-                title: 'First Name'
+            fullName: {
+                title: 'Full Name',
+                width: '250px',
+                sort: true,
+                sortDirection: 'asc'
             },
-            lastName: {
-                title: 'Last Name'
-            },
-            position: {
-                title: 'Position',
-                valuePrepareFunction: position => position.name
+            pName: {
+                title: 'Position'
             }
         }
     };
@@ -44,7 +44,12 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         this.employeeService.query().subscribe(
             (res: HttpResponse<IEmployee[]>) => {
                 this.employees = res.body;
-                this.data = new LocalDataSource(res.body);
+                this.data = new LocalDataSource();
+                for (const employee of res.body) {
+                    employee.fullName = employee.firstName + ' ' + employee.lastName;
+                    employee.pName = employee.position.name;
+                    this.data.add(employee);
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
