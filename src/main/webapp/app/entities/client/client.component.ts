@@ -7,6 +7,7 @@ import { IClient } from 'app/shared/model/client.model';
 import { Principal } from 'app/core';
 import { ClientService } from './client.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-client',
@@ -18,6 +19,19 @@ export class ClientComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     settings = {
+        actions: {
+            custom: [
+                {
+                    name: 'view',
+                    title: 'View'
+                }
+            ]
+        },
+        add: {
+            create: true,
+            addButtonContent: 'Create new client'
+        },
+        mode: 'external',
         columns: {
             name: {
                 title: 'Name'
@@ -31,9 +45,8 @@ export class ClientComponent implements OnInit, OnDestroy {
             email: {
                 title: 'E-mail'
             },
-            city: {
-                title: 'City',
-                valuePrepareFunction: city => city.name
+            cityClient: {
+                title: 'City'
             }
         }
     };
@@ -42,14 +55,22 @@ export class ClientComponent implements OnInit, OnDestroy {
         private clientService: ClientService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {}
-
+    onCustom(event) {
+        // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
+        this.router.navigateByUrl('client/' + event.data.id + '/view');
+    }
     loadAll() {
         this.clientService.query().subscribe(
             (res: HttpResponse<IClient[]>) => {
                 this.clients = res.body;
-                this.data = new LocalDataSource(res.body);
+                this.data = new LocalDataSource();
+                for (const client of res.body) {
+                    client.cityClient = client.city.name;
+                    this.data.add(client);
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -77,5 +98,10 @@ export class ClientComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    createNew() {
+        this.router.navigateByUrl('/client/new');
+        console.log('blabla');
     }
 }
