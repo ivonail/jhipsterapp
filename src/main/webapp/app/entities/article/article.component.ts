@@ -9,6 +9,7 @@ import { ArticleService } from './article.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { isNullOrUndefined } from 'util';
 import { isDefined } from '@angular/compiler/src/util';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-article',
@@ -21,6 +22,29 @@ export class ArticleComponent implements OnInit, OnDestroy {
     data: LocalDataSource;
 
     settings = {
+        actions: {
+            custom: [
+                {
+                    name: 'view',
+                    title: 'View '
+                },
+                {
+                    name: 'edit',
+                    title: 'Edit '
+                },
+                {
+                    name: 'delete',
+                    title: 'Delete '
+                }
+            ],
+            delete: false,
+            edit: false
+        },
+        add: {
+            create: true,
+            addButtonContent: 'Create new article'
+        },
+        mode: 'external',
         columns: {
             id: {
                 title: 'ID',
@@ -49,8 +73,19 @@ export class ArticleComponent implements OnInit, OnDestroy {
         private articleService: ArticleService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {}
+    onCustom(event) {
+        // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
+        if (event.action === 'view') {
+            this.router.navigateByUrl('article/' + event.data.id + '/view');
+        } else if (event.action === 'edit') {
+            this.router.navigateByUrl('article/' + event.data.id + '/edit');
+        } else if (event.action === 'delete') {
+            this.router.navigate(['/', { outlets: { popup: 'article/' + event.data.id + '/delete' } }]);
+        }
+    }
 
     loadAll() {
         this.articleService.query().subscribe(
@@ -92,5 +127,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    createNew() {
+        this.router.navigateByUrl('/article/new');
     }
 }

@@ -8,6 +8,7 @@ import { Principal } from 'app/core';
 import { EmployeeService } from './employee.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { IPosition } from 'app/shared/model/position.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-employee',
@@ -20,6 +21,29 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     data: LocalDataSource;
 
     settings = {
+        actions: {
+            custom: [
+                {
+                    name: 'view',
+                    title: 'View '
+                },
+                {
+                    name: 'edit',
+                    title: 'Edit '
+                },
+                {
+                    name: 'delete',
+                    title: 'Delete '
+                }
+            ],
+            delete: false,
+            edit: false
+        },
+        add: {
+            create: true,
+            addButtonContent: 'Create new employee'
+        },
+        mode: 'external',
         columns: {
             fullName: {
                 title: 'Full Name',
@@ -37,8 +61,19 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         private employeeService: EmployeeService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {}
+    onCustom(event) {
+        // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
+        if (event.action === 'view') {
+            this.router.navigateByUrl('employee/' + event.data.id + '/view');
+        } else if (event.action === 'edit') {
+            this.router.navigateByUrl('employee/' + event.data.id + '/edit');
+        } else if (event.action === 'delete') {
+            this.router.navigate(['/', { outlets: { popup: 'employee/' + event.data.id + '/delete' } }]);
+        }
+    }
 
     loadAll() {
         this.employeeService.query().subscribe(
@@ -77,5 +112,8 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    createNew() {
+        this.router.navigateByUrl('/employee/new');
     }
 }

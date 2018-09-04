@@ -6,6 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { ICity } from 'app/shared/model/city.model';
 import { Principal } from 'app/core';
 import { CityService } from './city.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-city',
@@ -16,6 +17,29 @@ export class CityComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     settings = {
+        actions: {
+            custom: [
+                {
+                    name: 'view',
+                    title: 'View '
+                },
+                {
+                    name: 'edit',
+                    title: 'Edit '
+                },
+                {
+                    name: 'delete',
+                    title: 'Delete '
+                }
+            ],
+            delete: false,
+            edit: false
+        },
+        add: {
+            create: true,
+            addButtonContent: 'Create new city'
+        },
+        mode: 'external',
         columns: {
             name: {
                 title: 'Name'
@@ -30,8 +54,19 @@ export class CityComponent implements OnInit, OnDestroy {
         private cityService: CityService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {}
+    onCustom(event) {
+        // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
+        if (event.action === 'view') {
+            this.router.navigateByUrl('city/' + event.data.id + '/view');
+        } else if (event.action === 'edit') {
+            this.router.navigateByUrl('city/' + event.data.id + '/edit');
+        } else if (event.action === 'delete') {
+            this.router.navigate(['/', { outlets: { popup: 'city/' + event.data.id + '/delete' } }]);
+        }
+    }
 
     loadAll() {
         this.cityService.query().subscribe(
@@ -64,5 +99,8 @@ export class CityComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    createNew() {
+        this.router.navigateByUrl('/city/new');
     }
 }

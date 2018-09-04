@@ -23,15 +23,15 @@ export class ClientComponent implements OnInit, OnDestroy {
             custom: [
                 {
                     name: 'view',
-                    title: 'View'
+                    title: 'View '
                 },
                 {
                     name: 'edit',
-                    title: 'Edit'
+                    title: 'Edit '
                 },
                 {
                     name: 'delete',
-                    title: 'Delete'
+                    title: 'Delete '
                 }
             ],
             delete: false,
@@ -118,6 +118,5 @@ export class ClientComponent implements OnInit, OnDestroy {
 
     createNew() {
         this.router.navigateByUrl('/client/new');
-        console.log('blabla');
     }
 }
