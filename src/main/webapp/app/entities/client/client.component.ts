@@ -24,8 +24,18 @@ export class ClientComponent implements OnInit, OnDestroy {
                 {
                     name: 'view',
                     title: 'View'
+                },
+                {
+                    name: 'edit',
+                    title: 'Edit'
+                },
+                {
+                    name: 'delete',
+                    title: 'Delete'
                 }
-            ]
+            ],
+            delete: false,
+            edit: false
         },
         add: {
             create: true,
@@ -60,7 +70,13 @@ export class ClientComponent implements OnInit, OnDestroy {
     ) {}
     onCustom(event) {
         // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
-        this.router.navigateByUrl('client/' + event.data.id + '/view');
+        if (event.action === 'view') {
+            this.router.navigateByUrl('client/' + event.data.id + '/view');
+        } else if (event.action === 'edit') {
+            this.router.navigateByUrl('client/' + event.data.id + '/edit');
+        } else if (event.action === 'delete') {
+            this.router.navigate(['/', { outlets: { popup: 'client/' + event.data.id + '/delete' } }]);
+        }
     }
     loadAll() {
         this.clientService.query().subscribe(
