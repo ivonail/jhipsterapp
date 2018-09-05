@@ -89,7 +89,7 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
                 this.data = new LocalDataSource();
                 for (const order of res.body) {
                     if (order.city) {
-                        order.orderCity = order.city.name;
+                        order.orderCity = order.city.name + ' ' + order.city.zipcode;
                     } else {
                         order.orderCity = 'Not defined';
                     }

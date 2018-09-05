@@ -52,10 +52,16 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
                 title: 'Ordered amount'
             },
             itemPrice: {
-                title: 'Item price'
+                title: 'Full price'
             },
             onlineArticle: {
                 title: 'Article'
+            },
+            articlePrice: {
+                title: 'Article price'
+            },
+            orderId: {
+                title: 'Order id'
             }
         }
     };
@@ -85,11 +91,14 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
                 for (const item of res.body) {
                     item.itemPrice = item.orderedAmount * item.article.price;
                     if (item.article) {
+                        item.articlePrice = item.article.price;
                         item.onlineArticle = item.article.name;
                     } else {
                         item.onlineArticle = 'Not defined';
                     }
-
+                    if (item.onlineOrder) {
+                        item.orderId = item.onlineOrder.id;
+                    }
                     this.data.add(item);
                 }
             },
