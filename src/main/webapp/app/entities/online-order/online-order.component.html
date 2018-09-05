@@ -1,21 +1,21 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="brezaApp.onlineOrder.home.title">Online Orders</span>
+        <!-- <span jhiTranslate="brezaApp.onlineOrder.home.title">Online Orders</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-online-order" [routerLink]="['/online-order/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="brezaApp.onlineOrder.home.createLabel">
             Create new Online Order
             </span>
-        </button>
+        </button> -->
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="onlineOrders">
+    <!-- <div class="table-responsive" *ngIf="onlineOrders">
         <table class="table table-striped">
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="brezaApp.onlineOrder.adress">Adress</span></th>
+            <th><span jhiTranslate="brezaApp.onlineOrder.address">Address</span></th>
             <th><span jhiTranslate="brezaApp.onlineOrder.phoneNumber">Phone Number</span></th>
             <th><span jhiTranslate="brezaApp.onlineOrder.totalPrice">Total Price</span></th>
             <th><span jhiTranslate="brezaApp.onlineOrder.client">Client</span></th>
@@ -26,7 +26,7 @@
             <tbody>
             <tr *ngFor="let onlineOrder of onlineOrders ;trackBy: trackId">
                 <td><a [routerLink]="['/online-order', onlineOrder.id, 'view' ]">{{onlineOrder.id}}</a></td>
-                <td>{{onlineOrder.adress}}</td>
+                <td>{{onlineOrder.address}}</td>
                 <td>{{onlineOrder.phoneNumber}}</td>
                 <td>{{onlineOrder.totalPrice}}</td>
                 <td>
@@ -66,5 +66,6 @@
             </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
+    <ng2-smart-table [settings]="settings" [source]="data"  (create)="createNew()" (custom)="onCustom($event)"></ng2-smart-table>
 </div>

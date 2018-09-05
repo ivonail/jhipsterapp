@@ -10,12 +10,12 @@
                         [(ngModel)]="onlineOrder.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="brezaApp.onlineOrder.adress" for="field_adress">Adress</label>
-                    <input type="text" class="form-control" name="adress" id="field_adress"
-                        [(ngModel)]="onlineOrder.adress" required/>
-                    <div [hidden]="!(editForm.controls.adress?.dirty && editForm.controls.adress?.invalid)">
+                    <label class="form-control-label" jhiTranslate="brezaApp.onlineOrder.address" for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                        [(ngModel)]="onlineOrder.address" required/>
+                    <div [hidden]="!(editForm.controls.address?.dirty && editForm.controls.address?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.adress?.errors?.required" jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.address?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -31,11 +31,11 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="brezaApp.onlineOrder.totalPrice" for="field_totalPrice">Total Price</label>
                     <input type="number" class="form-control" name="totalPrice" id="field_totalPrice"
                         [(ngModel)]="onlineOrder.totalPrice" />
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="brezaApp.onlineOrder.client" for="field_client">Client</label>

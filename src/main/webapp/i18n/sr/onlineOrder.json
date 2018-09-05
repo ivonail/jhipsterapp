@@ -16,7 +16,7 @@
             "detail": {
                 "title": "Online Order"
             },
-            "adress": "Adress",
+            "address": "Address",
             "phoneNumber": "Phone Number",
             "totalPrice": "Total Price",
             "client": "Client",

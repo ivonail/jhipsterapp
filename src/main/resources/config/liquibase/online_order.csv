@@ -1,0 +1,12 @@
+id;address;phone_number;total_price;client_id;city_id
+1;Ulica;565454666;null;2;1
+2;Beogradska 56;8888888;null;3;2
+3;Resavska 55;8844848;null;1;2
+4;Tirsova 44;5888-695;null;4;3
+5;Tirsova 44;5888-695;null;5;4
+6;Tirsova 44;5888-695;null;1;5
+7;Tirsova 4;5888-695;null;2;1
+8;Tirsova 44;5888-695;null;5;2
+9;Tirsova 44;5888-695;null;3;3
+10;Tirsova 44;5888-695;null;6;2
+11;Tirsova 10;5888-695;null;1;1

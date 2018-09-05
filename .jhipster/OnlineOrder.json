@@ -23,7 +23,7 @@
     ],
     "fields": [
         {
-            "fieldName": "adress",
+            "fieldName": "address",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

@@ -22,8 +22,8 @@ public class OnlineOrder implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "adress", nullable = false)
-    private String adress;
+    @Column(name = "address", nullable = false)
+    private String address;
 
     @NotNull
     @Column(name = "phone_number", nullable = false)
@@ -51,17 +51,17 @@ public class OnlineOrder implements Serializable {
         this.id = id;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public OnlineOrder adress(String adress) {
-        this.adress = adress;
+    public OnlineOrder address(String address) {
+        this.address = address;
         return this;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhoneNumber() {
@@ -141,7 +141,7 @@ public class OnlineOrder implements Serializable {
     public String toString() {
         return "OnlineOrder{" +
             "id=" + getId() +
-            ", adress='" + getAdress() + "'" +
+            ", address='" + getAddress() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", totalPrice=" + getTotalPrice() +
             "}";

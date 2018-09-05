@@ -18,7 +18,7 @@
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "item"
+            "otherEntityField": "name"
         }
     ],
     "fields": [

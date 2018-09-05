@@ -41,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BrezaApp.class)
 public class OnlineOrderResourceIntTest {
 
-    private static final String DEFAULT_ADRESS = "AAAAAAAAAA";
-    private static final String UPDATED_ADRESS = "BBBBBBBBBB";
+    private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
 
     private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
@@ -89,7 +89,7 @@ public class OnlineOrderResourceIntTest {
      */
     public static OnlineOrder createEntity(EntityManager em) {
         OnlineOrder onlineOrder = new OnlineOrder()
-            .adress(DEFAULT_ADRESS)
+            .address(DEFAULT_ADDRESS)
             .phoneNumber(DEFAULT_PHONE_NUMBER)
             .totalPrice(DEFAULT_TOTAL_PRICE);
         // Add required entity
@@ -125,7 +125,7 @@ public class OnlineOrderResourceIntTest {
         List<OnlineOrder> onlineOrderList = onlineOrderRepository.findAll();
         assertThat(onlineOrderList).hasSize(databaseSizeBeforeCreate + 1);
         OnlineOrder testOnlineOrder = onlineOrderList.get(onlineOrderList.size() - 1);
-        assertThat(testOnlineOrder.getAdress()).isEqualTo(DEFAULT_ADRESS);
+        assertThat(testOnlineOrder.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testOnlineOrder.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
         assertThat(testOnlineOrder.getTotalPrice()).isEqualTo(DEFAULT_TOTAL_PRICE);
     }
@@ -151,10 +151,10 @@ public class OnlineOrderResourceIntTest {
 
     @Test
     @Transactional
-    public void checkAdressIsRequired() throws Exception {
+    public void checkAddressIsRequired() throws Exception {
         int databaseSizeBeforeTest = onlineOrderRepository.findAll().size();
         // set the field null
-        onlineOrder.setAdress(null);
+        onlineOrder.setAddress(null);
 
         // Create the OnlineOrder, which fails.
 
@@ -196,7 +196,7 @@ public class OnlineOrderResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(onlineOrder.getId().intValue())))
-            .andExpect(jsonPath("$.[*].adress").value(hasItem(DEFAULT_ADRESS.toString())))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].totalPrice").value(hasItem(DEFAULT_TOTAL_PRICE)));
     }
@@ -213,7 +213,7 @@ public class OnlineOrderResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(onlineOrder.getId().intValue()))
-            .andExpect(jsonPath("$.adress").value(DEFAULT_ADRESS.toString()))
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.toString()))
             .andExpect(jsonPath("$.totalPrice").value(DEFAULT_TOTAL_PRICE));
     }
@@ -238,7 +238,7 @@ public class OnlineOrderResourceIntTest {
         // Disconnect from session so that the updates on updatedOnlineOrder are not directly saved in db
         em.detach(updatedOnlineOrder);
         updatedOnlineOrder
-            .adress(UPDATED_ADRESS)
+            .address(UPDATED_ADDRESS)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .totalPrice(UPDATED_TOTAL_PRICE);
 
@@ -251,7 +251,7 @@ public class OnlineOrderResourceIntTest {
         List<OnlineOrder> onlineOrderList = onlineOrderRepository.findAll();
         assertThat(onlineOrderList).hasSize(databaseSizeBeforeUpdate);
         OnlineOrder testOnlineOrder = onlineOrderList.get(onlineOrderList.size() - 1);
-        assertThat(testOnlineOrder.getAdress()).isEqualTo(UPDATED_ADRESS);
+        assertThat(testOnlineOrder.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testOnlineOrder.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
         assertThat(testOnlineOrder.getTotalPrice()).isEqualTo(UPDATED_TOTAL_PRICE);
     }
