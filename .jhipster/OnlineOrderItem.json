@@ -1,5 +1,26 @@
 {
-    "name": "OnlineOrderItem",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "onlineOrder",
+            "otherEntityName": "onlineOrder",
+            "otherEntityField": "id",
+            "relationshipValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "item"
+        }
+    ],
     "fields": [
         {
             "fieldName": "orderedAmount",
@@ -13,21 +34,11 @@
             "fieldType": "Integer"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "onlineOrder",
-            "otherEntityName": "onlineOrder",
-            "otherEntityField": "id"
-        }
-    ],
     "changelogDate": "20180905084738",
-    "entityTableName": "online_order_item",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "online_order_item",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

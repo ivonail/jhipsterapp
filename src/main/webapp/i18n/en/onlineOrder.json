@@ -18,7 +18,9 @@
             },
             "adress": "Adress",
             "phoneNumber": "Phone Number",
-            "totalPrice": "Total Price"
+            "totalPrice": "Total Price",
+            "client": "Client",
+            "city": "City"
         }
     }
 }
