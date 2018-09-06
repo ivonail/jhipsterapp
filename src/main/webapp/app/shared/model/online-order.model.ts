@@ -1,6 +1,6 @@
 import { IClient } from 'app/shared/model//client.model';
 import { ICity } from 'app/shared/model//city.model';
-
+import { IOnlineOrderItem } from 'app/shared/model//online-order-item.model';
 export interface IOnlineOrder {
     id?: number;
     address?: string;

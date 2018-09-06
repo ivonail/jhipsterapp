@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
@@ -7,17 +7,21 @@ import { IOnlineOrderItem } from 'app/shared/model/online-order-item.model';
 import { Principal } from 'app/core';
 import { OnlineOrderItemService } from './online-order-item.service';
 import { LocalDataSource } from 'ng2-smart-table';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'jhi-online-order-item',
     templateUrl: './online-order-item.component.html'
+    // inputs: ['idId']
 })
 export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     onlineOrderItems: IOnlineOrderItem[];
+    itemsFilter: IOnlineOrderItem[];
     currentAccount: any;
     eventSubscriber: Subscription;
     data: LocalDataSource;
+    @Input() idId: number;
+    paramId: number;
     settings = {
         actions: {
             custom: [
@@ -71,7 +75,8 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
     onCustom(event) {
         // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
@@ -99,7 +104,9 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
                     if (item.onlineOrder) {
                         item.orderId = item.onlineOrder.id;
                     }
-                    this.data.add(item);
+                    if (item.orderId === this.idId) {
+                        this.data.add(item);
+                    }
                 }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -107,6 +114,7 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        // this.route.params.subscribe(params => {this.paramId=params['id'];})
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

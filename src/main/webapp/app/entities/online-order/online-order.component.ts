@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
-
+import { OnlineOrderItemComponent } from '../online-order-item/online-order-item.component';
 import { IOnlineOrder } from 'app/shared/model/online-order.model';
 import { Principal } from 'app/core';
 import { OnlineOrderService } from './online-order.service';
