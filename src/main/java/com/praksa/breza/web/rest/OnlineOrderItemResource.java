@@ -89,6 +89,12 @@ public class OnlineOrderItemResource {
         return onlineOrderItemRepository.findAll();
     }
 
+    @GetMapping("/online-order-items/online-orders/{id}")
+    @Timed
+    public List<OnlineOrderItem> getAllOnlineOrderItems(@PathVariable long id) {
+        List<OnlineOrderItem> onlineOrderItems = onlineOrderItemRepository.findByOnlineOrderId(id);
+        return onlineOrderItems;
+    }
     /**
      * GET  /online-order-items/:id : get the "id" onlineOrderItem.
      *

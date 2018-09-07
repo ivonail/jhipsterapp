@@ -9,7 +9,7 @@ export interface IOnlineOrderItem {
     article?: IArticle;
     onlineArticle?: String;
     articlePrice?: number;
-    orderId?: number;
+    orderId?: number; // added
 }
 
 export class OnlineOrderItem implements IOnlineOrderItem {

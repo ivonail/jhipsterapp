@@ -89,7 +89,7 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
         this.route.params.subscribe(params => {
             this.onlineOrderId = +params['id'];
         });
-        this.onlineOrderItemService.query().subscribe(
+        this.onlineOrderItemService.findByOrderId(this.onlineOrderId).subscribe(
             (res: HttpResponse<IOnlineOrderItem[]>) => {
                 this.onlineOrderItems = res.body;
                 this.data = new LocalDataSource();
@@ -104,9 +104,10 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
                     if (item.onlineOrder) {
                         item.orderId = item.onlineOrder.id;
                     }
-                    if (item.orderId === this.onlineOrderId) {
-                        this.data.add(item);
-                    }
+                    // if (item.orderId === this.onlineOrderId) {
+                    //     this.data.add(item);
+                    // }
+                    this.data.add(item);
                 }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
