@@ -12,8 +12,6 @@ import {
     onlineOrderItemRoute,
     onlineOrderItemPopupRoute
 } from './';
-import { BrezaOnlineOrderModule } from 'app/entities/online-order/online-order.module';
-import { OnlineOrder } from 'app/shared/model/online-order.model';
 
 const ENTITY_STATES = [...onlineOrderItemRoute, ...onlineOrderItemPopupRoute];
 
@@ -26,7 +24,6 @@ const ENTITY_STATES = [...onlineOrderItemRoute, ...onlineOrderItemPopupRoute];
         OnlineOrderItemDeleteDialogComponent,
         OnlineOrderItemDeletePopupComponent
     ],
-    exports: [OnlineOrderItemComponent],
     entryComponents: [
         OnlineOrderItemComponent,
         OnlineOrderItemUpdateComponent,

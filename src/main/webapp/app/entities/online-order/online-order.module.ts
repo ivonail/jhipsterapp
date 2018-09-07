@@ -12,15 +12,11 @@ import {
     onlineOrderRoute,
     onlineOrderPopupRoute
 } from './';
-import { BrezaOnlineOrderItemModule } from 'app/entities/online-order-item/online-order-item.module';
-// import { OnlineOrderItemComponent } from 'app/entities/online-order-item/online-order-item.component';
-
-// import { OnlineOrderItemComponent } from 'app/entities/online-order-item';
 
 const ENTITY_STATES = [...onlineOrderRoute, ...onlineOrderPopupRoute];
 
 @NgModule({
-    imports: [BrezaSharedModule, RouterModule.forChild(ENTITY_STATES), Ng2SmartTableModule, BrezaOnlineOrderItemModule],
+    imports: [BrezaSharedModule, RouterModule.forChild(ENTITY_STATES), Ng2SmartTableModule],
     declarations: [
         OnlineOrderComponent,
         OnlineOrderDetailComponent,

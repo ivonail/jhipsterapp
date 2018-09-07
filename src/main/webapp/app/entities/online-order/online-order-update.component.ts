@@ -10,8 +10,6 @@ import { IClient } from 'app/shared/model/client.model';
 import { ClientService } from 'app/entities/client';
 import { ICity } from 'app/shared/model/city.model';
 import { CityService } from 'app/entities/city';
-// import { IOnlineOrderItem } from 'app/shared/model/online-order-item.model';
-// import { OnlineOrderItemService } from 'app/entities/online-order-item';
 
 @Component({
     selector: 'jhi-online-order-update',
@@ -25,14 +23,11 @@ export class OnlineOrderUpdateComponent implements OnInit {
 
     cities: ICity[];
 
-    // onlineOrderItems: IOnlineOrderItem[];
-
     constructor(
         private jhiAlertService: JhiAlertService,
         private onlineOrderService: OnlineOrderService,
         private clientService: ClientService,
         private cityService: CityService,
-        // private onlineOrderItemService: OnlineOrderItemService,
         private activatedRoute: ActivatedRoute
     ) {}
 
