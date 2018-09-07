@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, Input } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
@@ -19,6 +19,8 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     data: LocalDataSource;
     onlineOrderId: number;
+    total: number;
+
     settings = {
         actions: {
             custom: [
@@ -93,8 +95,12 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
             (res: HttpResponse<IOnlineOrderItem[]>) => {
                 this.onlineOrderItems = res.body;
                 this.data = new LocalDataSource();
+                this.total = 0;
                 for (const item of res.body) {
                     item.itemPrice = item.orderedAmount * item.article.price;
+                    this.total = this.total + item.itemPrice;
+                    item.onlineOrder.totalPrice = this.total;
+                    console.log('total price is ' + this.total);
                     if (item.article) {
                         item.articlePrice = item.article.price;
                         item.onlineArticle = item.article.name;
@@ -104,6 +110,7 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
                     if (item.onlineOrder) {
                         item.orderId = item.onlineOrder.id;
                     }
+
                     // if (item.orderId === this.onlineOrderId) {
                     //     this.data.add(item);
                     // }
