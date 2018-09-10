@@ -24,7 +24,8 @@ export class VehicleComponent implements OnInit, OnDestroy {
             custom: [
                 {
                     name: 'view',
-                    title: 'View '
+                    type: 'html',
+                    title: '<fa-icon [icon]="&#39;plus&#39;"></fa-icon>'
                 },
                 {
                     name: 'delete',
@@ -32,10 +33,13 @@ export class VehicleComponent implements OnInit, OnDestroy {
                 }
             ],
             delete: false
-            // edit: false
+        },
+        edit: {
+            confirmSave: true
         },
         add: {
             create: true,
+            confirmCreate: true,
             addButtonContent: 'Create new vehicle'
         },
         // mode: 'external',
@@ -56,7 +60,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
             }
         },
         attr: {
-            class: 'smart-table'
+            class: 'smart-table table table-bordered'
         }
     };
     constructor(
@@ -99,15 +103,47 @@ export class VehicleComponent implements OnInit, OnDestroy {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: IVehicle) {
+    trackId(item: IVehicle) {
         return item.id;
     }
 
     registerChangeInVehicles() {
-        this.eventSubscriber = this.eventManager.subscribe('vehicleListModification', response => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('vehicleListModification', () => this.loadAll());
     }
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    onSaveConfirm(event) {
+        console.log('radi');
+        if (this.validacija(event.newData.brand)) {
+            if (window.confirm('Are you sure you want to save?')) {
+                event.confirm.resolve(event.newData);
+            } else {
+                event.confirm.reject();
+            }
+        } else {
+            window.alert('Your input for model is not correct');
+        }
+    }
+
+    onCreateConfirm(event) {
+        if (this.validacija(event.newData.brand)) {
+            if (window.confirm('Are you sure you want to add?')) {
+                event.confirm.resolve(event.newData);
+            } else {
+                event.confirm.reject();
+            }
+        } else {
+            window.alert('Your input for model is not correct');
+        }
+    }
+
+    validacija(model: String) {
+        if (model.substring(0, 1) === model.substring(0, 1).toUpperCase()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

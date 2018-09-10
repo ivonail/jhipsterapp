@@ -7,6 +7,8 @@
             Create new Vehicle
             </span>
         </button> -->
+        
+        <fa-icon [icon]="'search'"></fa-icon>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
@@ -55,5 +57,5 @@
             </tbody>
         </table>
     </div> -->
-    <ng2-smart-table [settings]="settings" [source]="data" (custom)="onCustom($event)"></ng2-smart-table>
+    <ng2-smart-table [settings]="settings" [source]="data" (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)" (custom)="onCustom($event)"></ng2-smart-table>
 </div>
