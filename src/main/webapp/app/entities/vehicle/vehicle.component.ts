@@ -2,12 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { Observable } from 'rxjs';
 
-import { IVehicle } from 'app/shared/model/vehicle.model';
+import { IVehicle, Vehicle } from 'app/shared/model/vehicle.model';
 import { Principal } from 'app/core';
 import { VehicleService } from './vehicle.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Router } from '@angular/router';
+import { updateClassProp } from '@angular/core/src/render3/styling';
 
 @Component({
     selector: 'jhi-vehicle',
@@ -18,6 +20,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     data: LocalDataSource;
+    isSaving: boolean;
     settings = {
         actions: {
             columnTitle: '',
@@ -119,11 +122,12 @@ export class VehicleComponent implements OnInit, OnDestroy {
         if (this.validacija(event.newData.brand)) {
             if (window.confirm('Are you sure you want to save?')) {
                 event.confirm.resolve(event.newData);
+                this.subscribeToSaveResponse(this.vehicleService.update(event.newData));
             } else {
                 event.confirm.reject();
             }
         } else {
-            window.alert('Your input for model is not correct');
+            window.alert('Your input for brand is not correct');
         }
     }
 
@@ -131,15 +135,29 @@ export class VehicleComponent implements OnInit, OnDestroy {
         if (this.validacija(event.newData.brand)) {
             if (window.confirm('Are you sure you want to add?')) {
                 event.confirm.resolve(event.newData);
+
+                this.subscribeToSaveResponse(this.vehicleService.create(event.newData));
             } else {
                 event.confirm.reject();
             }
         } else {
-            window.alert('Your input for model is not correct');
+            window.alert('Your input for brand is not correct');
         }
     }
 
-    validacija(model: String) {
+    private subscribeToSaveResponse(result: Observable<HttpResponse<IVehicle>>) {
+        result.subscribe((res: HttpResponse<IVehicle>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    }
+
+    private onSaveError() {
+        this.isSaving = false;
+    }
+
+    private onSaveSuccess() {
+        this.isSaving = false;
+    }
+
+    validacija(model: String): boolean {
         if (model.substring(0, 1) === model.substring(0, 1).toUpperCase()) {
             return true;
         } else {
