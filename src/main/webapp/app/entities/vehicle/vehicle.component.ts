@@ -20,6 +20,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
     data: LocalDataSource;
     settings = {
         actions: {
+            columnTitle: '',
             custom: [
                 {
                     name: 'view',
@@ -53,6 +54,9 @@ export class VehicleComponent implements OnInit, OnDestroy {
             model: {
                 title: 'Model'
             }
+        },
+        attr: {
+            class: 'smart-table'
         }
     };
     constructor(
