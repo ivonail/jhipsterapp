@@ -94,4 +94,9 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
     set onlineOrderItem(onlineOrderItem: IOnlineOrderItem) {
         this._onlineOrderItem = onlineOrderItem;
     }
+    calculate() {
+        if (this.onlineOrderItem.article && this.onlineOrderItem.orderedAmount) {
+            this.onlineOrderItem.itemPrice = this.onlineOrderItem.article.price * this.onlineOrderItem.orderedAmount;
+        }
+    }
 }
