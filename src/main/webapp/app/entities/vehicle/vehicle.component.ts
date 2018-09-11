@@ -9,7 +9,6 @@ import { Principal } from 'app/core';
 import { VehicleService } from './vehicle.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Router } from '@angular/router';
-import { updateClassProp } from '@angular/core/src/render3/styling';
 
 @Component({
     selector: 'jhi-vehicle',
@@ -20,7 +19,6 @@ export class VehicleComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     data: LocalDataSource;
-    isSaving: boolean;
     settings = {
         actions: {
             columnTitle: '',
@@ -106,10 +104,6 @@ export class VehicleComponent implements OnInit, OnDestroy {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(item: IVehicle) {
-        return item.id;
-    }
-
     registerChangeInVehicles() {
         this.eventSubscriber = this.eventManager.subscribe('vehicleListModification', () => this.loadAll());
     }
@@ -122,6 +116,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
         if (this.validacija(event.newData.brand)) {
             if (window.confirm('Are you sure you want to save?')) {
                 event.confirm.resolve(event.newData);
+                console.log('Update');
                 this.subscribeToSaveResponse(this.vehicleService.update(event.newData));
             } else {
                 event.confirm.reject();
@@ -135,7 +130,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
         if (this.validacija(event.newData.brand)) {
             if (window.confirm('Are you sure you want to add?')) {
                 event.confirm.resolve(event.newData);
-
+                console.log('Create');
                 this.subscribeToSaveResponse(this.vehicleService.create(event.newData));
             } else {
                 event.confirm.reject();
@@ -150,11 +145,11 @@ export class VehicleComponent implements OnInit, OnDestroy {
     }
 
     private onSaveError() {
-        this.isSaving = false;
+        console.log('Error');
     }
 
     private onSaveSuccess() {
-        this.isSaving = false;
+        console.log('Success');
     }
 
     validacija(model: String): boolean {
