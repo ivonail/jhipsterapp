@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
@@ -28,7 +28,8 @@ export class OnlineOrderUpdateComponent implements OnInit {
         private onlineOrderService: OnlineOrderService,
         private clientService: ClientService,
         private cityService: CityService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private route: Router
     ) {}
 
     ngOnInit() {
@@ -93,5 +94,13 @@ export class OnlineOrderUpdateComponent implements OnInit {
 
     set onlineOrder(onlineOrder: IOnlineOrder) {
         this._onlineOrder = onlineOrder;
+    }
+
+    ruta() {
+        if (this.route.url.includes('edit')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

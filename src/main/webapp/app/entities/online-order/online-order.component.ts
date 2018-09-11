@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, Observer } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IOnlineOrder } from 'app/shared/model/online-order.model';
 import { Principal } from 'app/core';
 import { OnlineOrderService } from './online-order.service';
 import { LocalDataSource } from 'ng2-smart-table';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { OnlineOrderItem } from 'app/shared/model/online-order-item.model';
 
 @Component({
     selector: 'jhi-online-order',

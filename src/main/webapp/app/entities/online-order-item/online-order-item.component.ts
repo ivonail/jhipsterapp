@@ -147,4 +147,7 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     createNew() {
         this.router.navigateByUrl('/online-order-item/new');
     }
+    ruta() {
+        this.route.snapshot.url.toString().includes('new');
+    }
 }
