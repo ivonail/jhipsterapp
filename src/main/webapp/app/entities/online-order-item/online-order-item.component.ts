@@ -145,6 +145,10 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
         this.jhiAlertService.error(errorMessage, null, null);
     }
     createNew() {
+        this.eventManager.broadcast({
+            name: 'updateOnlineOrder',
+            content: ''
+        });
         this.router.navigateByUrl('/online-order-item/new');
     }
     ruta() {

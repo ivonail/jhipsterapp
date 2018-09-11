@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { JhiAlertService } from 'ng-jhipster';
+import { Observable, Subscription } from 'rxjs';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 
 import { IOnlineOrder } from 'app/shared/model/online-order.model';
 import { OnlineOrderService } from './online-order.service';
@@ -18,7 +18,7 @@ import { CityService } from 'app/entities/city';
 export class OnlineOrderUpdateComponent implements OnInit {
     private _onlineOrder: IOnlineOrder;
     isSaving: boolean;
-
+    eventSubscriber: Subscription;
     clients: IClient[];
 
     cities: ICity[];
@@ -29,10 +29,12 @@ export class OnlineOrderUpdateComponent implements OnInit {
         private clientService: ClientService,
         private cityService: CityService,
         private activatedRoute: ActivatedRoute,
-        private route: Router
+        private route: Router,
+        private eventManager: JhiEventManager
     ) {}
 
     ngOnInit() {
+        this.registerOnlineOrderChange();
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ onlineOrder }) => {
             this.onlineOrder = onlineOrder;
@@ -70,7 +72,7 @@ export class OnlineOrderUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
-        this.previousState();
+        // this.previousState();
     }
 
     private onSaveError() {
@@ -102,5 +104,8 @@ export class OnlineOrderUpdateComponent implements OnInit {
         } else {
             return false;
         }
+    }
+    registerOnlineOrderChange() {
+        this.eventSubscriber = this.eventManager.subscribe('updateOnlineOrder', response => this.save());
     }
 }
