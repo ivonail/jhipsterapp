@@ -3,7 +3,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
-import { IOnlineOrderItem } from 'app/shared/model/online-order-item.model';
+import { IOnlineOrderItem, OnlineOrderItem } from 'app/shared/model/online-order-item.model';
 import { Principal } from 'app/core';
 import { OnlineOrderItemService } from './online-order-item.service';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -91,7 +91,7 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
             setTimeout(() => {
                 this.router.navigate([
                     '/',
-                    { outlets: { popup: 'online-order/' + this.onlineOrderId + 'online-order-item/' + event.data.id + '/delete' } }
+                    { outlets: { popup: 'online-order/' + this.onlineOrderId + '/online-order-item/' + event.data.id + '/delete' } }
                 ]);
             }, 100);
         }

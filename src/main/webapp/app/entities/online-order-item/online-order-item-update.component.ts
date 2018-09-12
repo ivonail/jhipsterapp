@@ -6,7 +6,7 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IOnlineOrderItem } from 'app/shared/model/online-order-item.model';
 import { OnlineOrderItemService } from './online-order-item.service';
-import { IOnlineOrder } from 'app/shared/model/online-order.model';
+import { IOnlineOrder, OnlineOrder } from 'app/shared/model/online-order.model';
 import { OnlineOrderService } from 'app/entities/online-order';
 import { IArticle } from 'app/shared/model/article.model';
 import { ArticleService } from 'app/entities/article';
@@ -36,6 +36,16 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ onlineOrderItem }) => {
             this.onlineOrderItem = onlineOrderItem;
         });
+        this.activatedRoute.params.subscribe(params => {
+            this.onlineOrderItem.orderId = +params['onlineOrderId'];
+        });
+        this.onlineOrderService.find(this.onlineOrderItem.orderId).subscribe(
+            (res: HttpResponse<IOnlineOrder>) => {
+                this.onlineOrderItem.onlineOrder = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+
         this.onlineOrderService.query().subscribe(
             (res: HttpResponse<IOnlineOrder[]>) => {
                 this.onlineorders = res.body;
