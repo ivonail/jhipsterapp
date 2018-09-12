@@ -81,15 +81,18 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
         // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
         if (event.action === 'view') {
             setTimeout(() => {
-                this.router.navigate(['online-order-item/' + event.data.id + '/view']);
+                this.router.navigate(['online-order/' + this.onlineOrderId + '/online-order-item/' + event.data.id + '/view']);
             }, 100);
         } else if (event.action === 'edit') {
             setTimeout(() => {
-                this.router.navigate(['online-order-item/' + event.data.id + '/edit']);
+                this.router.navigate(['online-order/' + this.onlineOrderId + '/online-order-item/' + event.data.id + '/edit']);
             }, 100);
         } else if (event.action === 'delete') {
             setTimeout(() => {
-                this.router.navigate(['/', { outlets: { popup: 'online-order-item/' + event.data.id + '/delete' } }]);
+                this.router.navigate([
+                    '/',
+                    { outlets: { popup: 'online-order/' + this.onlineOrderId + 'online-order-item/' + event.data.id + '/delete' } }
+                ]);
             }, 100);
         }
     }
@@ -160,7 +163,7 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
             content: ''
         });
         setTimeout(() => {
-            this.router.navigate(['online-order-item/new']);
+            this.router.navigate(['online-order/' + this.onlineOrderId + '/online-order-item/new']);
         }, 100);
     }
     ruta() {

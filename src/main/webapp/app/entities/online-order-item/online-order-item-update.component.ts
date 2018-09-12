@@ -48,6 +48,7 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.calculate();
     }
 
     previousState() {
@@ -95,6 +96,7 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         this._onlineOrderItem = onlineOrderItem;
     }
     calculate() {
+        console.log('Calculate item price');
         if (this.onlineOrderItem.article && this.onlineOrderItem.orderedAmount) {
             this.onlineOrderItem.itemPrice = this.onlineOrderItem.article.price * this.onlineOrderItem.orderedAmount;
         }
