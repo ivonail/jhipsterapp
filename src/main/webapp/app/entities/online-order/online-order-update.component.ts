@@ -34,6 +34,7 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        this.registerTotalPriceChange();
         this.registerOnlineOrderChange();
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ onlineOrder }) => {
@@ -112,5 +113,12 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         console.log('Ng on Destroy');
         this.eventManager.destroy(this.eventSubscriber);
+    }
+
+    registerTotalPriceChange() {
+        this.eventSubscriber = this.eventManager.subscribe(
+            'updateTotalPrice',
+            response => (this.onlineOrder.totalPrice = response.content)
+        );
     }
 }
