@@ -19,6 +19,7 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     private _onlineOrder: IOnlineOrder;
     isSaving: boolean;
     eventSubscriber: Subscription;
+    eventSubscriber1: Subscription;
     clients: IClient[];
 
     cities: ICity[];
@@ -116,7 +117,7 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     }
 
     registerTotalPriceChange() {
-        this.eventSubscriber = this.eventManager.subscribe(
+        this.eventSubscriber1 = this.eventManager.subscribe(
             'updateTotalPrice',
             response => (this.onlineOrder.totalPrice = response.content)
         );
