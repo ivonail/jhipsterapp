@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { CityService } from 'app/entities/city';
     selector: 'jhi-online-order-update',
     templateUrl: './online-order-update.component.html'
 })
-export class OnlineOrderUpdateComponent implements OnInit {
+export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     private _onlineOrder: IOnlineOrder;
     isSaving: boolean;
     eventSubscriber: Subscription;
@@ -107,5 +107,10 @@ export class OnlineOrderUpdateComponent implements OnInit {
     }
     registerOnlineOrderChange() {
         this.eventSubscriber = this.eventManager.subscribe('updateOnlineOrder', response => this.save());
+    }
+
+    ngOnDestroy() {
+        console.log('Ng on Destroy');
+        this.eventManager.destroy(this.eventSubscriber);
     }
 }

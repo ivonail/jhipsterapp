@@ -80,11 +80,17 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
     onCustom(event) {
         // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`)
         if (event.action === 'view') {
-            this.router.navigateByUrl('online-order-item/' + event.data.id + '/view');
+            setTimeout(() => {
+                this.router.navigate(['online-order-item/' + event.data.id + '/view']);
+            }, 100);
         } else if (event.action === 'edit') {
-            this.router.navigateByUrl('online-order-item/' + event.data.id + '/edit');
+            setTimeout(() => {
+                this.router.navigate(['online-order-item/' + event.data.id + '/edit']);
+            }, 100);
         } else if (event.action === 'delete') {
-            this.router.navigate(['/', { outlets: { popup: 'online-order-item/' + event.data.id + '/delete' } }]);
+            setTimeout(() => {
+                this.router.navigate(['/', { outlets: { popup: 'online-order-item/' + event.data.id + '/delete' } }]);
+            }, 100);
         }
     }
     loadAll() {
@@ -149,7 +155,9 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
             name: 'updateOnlineOrder',
             content: ''
         });
-        this.router.navigateByUrl('/online-order-item/new');
+        setTimeout(() => {
+            this.router.navigate(['online-order-item/new']);
+        }, 100);
     }
     ruta() {
         this.route.snapshot.url.toString().includes('new');
