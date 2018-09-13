@@ -38,13 +38,11 @@ public class DeliveryOrder implements Serializable {
     @JoinColumn(unique = true)
     private OnlineOrder onlineOrder;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     @JsonIgnoreProperties("")
     private Employee warehouseClerk;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     @JsonIgnoreProperties("")
     private Employee driver;
 

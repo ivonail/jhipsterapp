@@ -23,19 +23,13 @@
             "relationshipName": "warehouseClerk",
             "otherEntityName": "employee",
             "relationshipType": "many-to-one",
-            "otherEntityField": "lastName",
-            "relationshipValidateRules": [
-                "required"
-            ]
+            "otherEntityField": "lastName"
         },
         {
             "relationshipName": "driver",
             "otherEntityName": "employee",
             "relationshipType": "many-to-one",
-            "otherEntityField": "lastName",
-            "relationshipValidateRules": [
-                "required"
-            ]
+            "otherEntityField": "lastName"
         }
     ],
     "fields": [

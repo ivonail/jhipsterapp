@@ -4,8 +4,6 @@ import com.praksa.breza.BrezaApp;
 
 import com.praksa.breza.domain.DeliveryOrder;
 import com.praksa.breza.domain.OnlineOrder;
-import com.praksa.breza.domain.Employee;
-import com.praksa.breza.domain.Employee;
 import com.praksa.breza.repository.DeliveryOrderRepository;
 import com.praksa.breza.web.rest.errors.ExceptionTranslator;
 
@@ -96,13 +94,6 @@ public class DeliveryOrderResourceIntTest {
         em.persist(onlineOrder);
         em.flush();
         deliveryOrder.setOnlineOrder(onlineOrder);
-        // Add required entity
-        Employee employee = EmployeeResourceIntTest.createEntity(em);
-        em.persist(employee);
-        em.flush();
-        deliveryOrder.setWarehouseClerk(employee);
-        // Add required entity
-        deliveryOrder.setDriver(employee);
         return deliveryOrder;
     }
 

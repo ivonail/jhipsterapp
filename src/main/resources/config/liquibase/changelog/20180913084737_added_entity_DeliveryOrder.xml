@@ -37,16 +37,16 @@
                 <constraints unique="true" nullable="false" uniqueConstraintName="ux_delivery_order_online_order_id" />
             </column>
             <column name="warehouse_clerk_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="driver_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-          <loadData
+         <loadData
             encoding="UTF-8"
             separator=";"
             file="config/liquibase/delivery_order.csv"
