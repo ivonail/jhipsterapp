@@ -82,9 +82,7 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
-        if (!this.provera) {
-            this.previousState();
-        } else {
+        if (this.provera) {
             this.router
                 .navigateByUrl('', { skipLocationChange: true })
                 .then(() => this.router.navigate(['online-order/' + this.onlineOrderItem.orderId + '/online-order-item/new']));
