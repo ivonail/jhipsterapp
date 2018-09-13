@@ -69,6 +69,9 @@
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-info" (click)="saveandcreate()">
+                    <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span>Save and create again</span>
+                </button>
             </div>
         </form>
     </div>

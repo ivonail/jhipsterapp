@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
@@ -22,13 +22,15 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
     onlineorders: IOnlineOrder[];
 
     articles: IArticle[];
+    provera: Boolean = false;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private onlineOrderItemService: OnlineOrderItemService,
         private onlineOrderService: OnlineOrderService,
         private articleService: ArticleService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -80,7 +82,13 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
 
     private onSaveSuccess() {
         this.isSaving = false;
-        this.previousState();
+        if (!this.provera) {
+            this.previousState();
+        } else {
+            this.router
+                .navigateByUrl('', { skipLocationChange: true })
+                .then(() => this.router.navigate(['online-order/' + this.onlineOrderItem.orderId + '/online-order-item/new']));
+        }
     }
 
     private onSaveError() {
@@ -110,5 +118,8 @@ export class OnlineOrderItemUpdateComponent implements OnInit {
         if (this.onlineOrderItem.article && this.onlineOrderItem.orderedAmount) {
             this.onlineOrderItem.itemPrice = this.onlineOrderItem.article.price * this.onlineOrderItem.orderedAmount;
         }
+    }
+    saveandcreate() {
+        this.provera = true;
     }
 }
