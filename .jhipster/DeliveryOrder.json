@@ -1,0 +1,61 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "vehicle",
+            "otherEntityName": "vehicle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "brand"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "onlineOrder",
+            "otherEntityName": "onlineOrder",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "deliveryOrder",
+            "relationshipValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "relationshipName": "warehouseClerk",
+            "otherEntityName": "employee",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "lastName",
+            "relationshipValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "relationshipName": "driver",
+            "otherEntityName": "employee",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "lastName",
+            "relationshipValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "deliveryDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180913084737",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "delivery_order",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
