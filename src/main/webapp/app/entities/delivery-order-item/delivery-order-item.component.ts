@@ -6,6 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IDeliveryOrderItem } from 'app/shared/model/delivery-order-item.model';
 import { Principal } from 'app/core';
 import { DeliveryOrderItemService } from './delivery-order-item.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'jhi-delivery-order-item',
@@ -15,16 +16,21 @@ export class DeliveryOrderItemComponent implements OnInit, OnDestroy {
     deliveryOrderItems: IDeliveryOrderItem[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    deliveryOrderId: number;
 
     constructor(
         private deliveryOrderItemService: DeliveryOrderItemService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private route: ActivatedRoute
     ) {}
 
     loadAll() {
-        this.deliveryOrderItemService.query().subscribe(
+        this.route.params.subscribe(params => {
+            this.deliveryOrderId = +params['id'];
+        });
+        this.deliveryOrderItemService.findByDeliveryId(this.deliveryOrderId).subscribe(
             (res: HttpResponse<IDeliveryOrderItem[]>) => {
                 this.deliveryOrderItems = res.body;
             },

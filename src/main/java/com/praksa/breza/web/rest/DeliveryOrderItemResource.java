@@ -88,6 +88,12 @@ public class DeliveryOrderItemResource {
         log.debug("REST request to get all DeliveryOrderItems");
         return deliveryOrderItemRepository.findAll();
     }
+    @GetMapping("/delivery-order-items/delivery-orders/{id}")
+    @Timed
+    public List<DeliveryOrderItem> getAllOnlineOrderItems(@PathVariable long id) {
+        List<DeliveryOrderItem> deliveryOrderItems = deliveryOrderItemRepository.findByDeliveryOrderId(id);
+        return deliveryOrderItems;
+    }
 
     /**
      * GET  /delivery-order-items/:id : get the "id" deliveryOrderItem.
