@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class VehicleComponent implements OnInit, OnDestroy {
     vehicles: IVehicle[];
+    tableEvent: any;
     currentAccount: any;
     eventSubscriber: Subscription;
     data: LocalDataSource;
@@ -113,9 +114,10 @@ export class VehicleComponent implements OnInit, OnDestroy {
     }
     onSaveConfirm(event) {
         console.log('radi');
+        this.tableEvent = event;
         if (this.validacija(event.newData.brand)) {
             if (window.confirm('Are you sure you want to save?')) {
-                event.confirm.resolve(event.newData);
+                // event.confirm.resolve(event.newData);
                 console.log('Update');
                 this.subscribeToSaveResponse(this.vehicleService.update(event.newData));
             } else {
@@ -127,9 +129,10 @@ export class VehicleComponent implements OnInit, OnDestroy {
     }
 
     onCreateConfirm(event) {
+        this.tableEvent = event;
         if (this.validacija(event.newData.brand)) {
             if (window.confirm('Are you sure you want to add?')) {
-                event.confirm.resolve(event.newData);
+                // event.confirm.resolve(event.newData);
                 console.log('Create');
                 this.subscribeToSaveResponse(this.vehicleService.create(event.newData));
             } else {
@@ -141,14 +144,15 @@ export class VehicleComponent implements OnInit, OnDestroy {
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IVehicle>>) {
-        result.subscribe((res: HttpResponse<IVehicle>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe((res: HttpResponse<IVehicle>) => this.onSaveSuccess(res.body), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveError() {
         console.log('Error');
     }
 
-    private onSaveSuccess() {
+    private onSaveSuccess(item: IVehicle) {
+        this.tableEvent.confirm.resolve(item);
         console.log('Success');
     }
 
