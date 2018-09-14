@@ -6,12 +6,16 @@ import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 
 import { IOnlineOrder } from 'app/shared/model/online-order.model';
 import { OnlineOrderService } from './online-order.service';
+import { OnlineOrderItemService } from 'app/entities/online-order-item';
 import { IClient } from 'app/shared/model/client.model';
 import { ClientService } from 'app/entities/client';
 import { ICity } from 'app/shared/model/city.model';
 import { CityService } from 'app/entities/city';
 import { DeliveryOrder } from 'app/shared/model/delivery-order.model';
 import { DeliveryOrderService } from 'app/entities/delivery-order';
+import { IOnlineOrderItem } from 'app/shared/model/online-order-item.model';
+import { DeliveryOrderItem } from 'app/shared/model/delivery-order-item.model';
+import { DeliveryOrderItemService } from 'app/entities/delivery-order-item';
 
 @Component({
     selector: 'jhi-online-order-update',
@@ -23,7 +27,7 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     eventSubscriber1: Subscription;
     clients: IClient[];
-
+    items: IOnlineOrderItem[];
     cities: ICity[];
 
     constructor(
@@ -32,6 +36,8 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
         private clientService: ClientService,
         private cityService: CityService,
         private deliveryOrderService: DeliveryOrderService,
+        private deliveryOrderItemService: DeliveryOrderItemService,
+        private onlineOrderItemService: OnlineOrderItemService,
         private activatedRoute: ActivatedRoute,
         private route: Router,
         private eventManager: JhiEventManager
@@ -128,10 +134,19 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
     }
     finishOrder() {
         this.save();
+        const deliveryOrderItem = new DeliveryOrderItem();
         const deliveryOrder = new DeliveryOrder();
         deliveryOrder.status = 'NEW';
         deliveryOrder.onlineOrder = this.onlineOrder;
+        deliveryOrderItem.deliveryOrder = deliveryOrder;
         this.deliveryOrderService.create(deliveryOrder).subscribe();
+        this.onlineOrderItemService.findByOrderId(deliveryOrder.onlineOrder.id).subscribe((res: HttpResponse<IOnlineOrderItem[]>) => {
+            this.items = res.body;
+            for (const item of this.items) {
+                deliveryOrderItem.onlineOrderItem = item;
+                this.deliveryOrderItemService.create(deliveryOrderItem).subscribe();
+            }
+        });
         this.previousState();
     }
 }
