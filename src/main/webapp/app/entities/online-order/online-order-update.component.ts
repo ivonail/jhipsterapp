@@ -10,6 +10,8 @@ import { IClient } from 'app/shared/model/client.model';
 import { ClientService } from 'app/entities/client';
 import { ICity } from 'app/shared/model/city.model';
 import { CityService } from 'app/entities/city';
+import { DeliveryOrder } from 'app/shared/model/delivery-order.model';
+import { DeliveryOrderService } from 'app/entities/delivery-order';
 
 @Component({
     selector: 'jhi-online-order-update',
@@ -29,6 +31,7 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
         private onlineOrderService: OnlineOrderService,
         private clientService: ClientService,
         private cityService: CityService,
+        private deliveryOrderService: DeliveryOrderService,
         private activatedRoute: ActivatedRoute,
         private route: Router,
         private eventManager: JhiEventManager
@@ -122,5 +125,13 @@ export class OnlineOrderUpdateComponent implements OnInit, OnDestroy {
             'updateTotalPrice',
             response => (this.onlineOrder.totalPrice = response.content)
         );
+    }
+    finishOrder() {
+        this.save();
+        const deliveryOrder = new DeliveryOrder();
+        deliveryOrder.status = 'NEW';
+        deliveryOrder.onlineOrder = this.onlineOrder;
+        this.deliveryOrderService.create(deliveryOrder).subscribe();
+        this.previousState();
     }
 }
